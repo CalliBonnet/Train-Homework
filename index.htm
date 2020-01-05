@@ -1,39 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+
+    <!-- Link to bootstrap css  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- Link to interal CSS file  -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <title>Train Scheduler</title>
 </head>
+
 <body>
-    
+
+    <!-- Header jumbotron -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <h1 class="display-4">Anytime is Train Time</h1>
+                        <p class="lead">Chooo Chooo!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Train Table below jumbotron -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Train Schedule
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Train Name</th>
+                                    <th scope="col">Destination</th>
+                                    <th scope="col">Frequency (in min)</th>
+                                    <th scope="col">Next Arrival</th>
+                                    <th scope="col">Minutes Away</th>
+                                </tr>
+                            </thead>
+                            <!-- Train inputs in the table  -->
+                            <tbody>
+                                <tr>
+                                    <th scope="row">name of train</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                    <td>@mdo</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <!-- Form below the table  -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        Add Train to Schedule
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label for="TrainName">Train Name</label>
+                                <input type="text" class="form-control" id="TrainName">
+                            </div>
+                            <div class="form-group">
+                                <label for="TrainDestination">Destination</label>
+                                <input type="text" class="form-control" id="TrainDestination">
+                            </div>
+                            <div class="form-group">
+                                <label for="TrainTime">First Train Time (HH:mm)</label>
+                                <input type="text" class="form-control" id="TrainTime">
+                            </div>
+                            <div class="form-group">
+                                <label for="TrainFrequency">Frequency (min)</label>
+                                <input type="text" class="form-control" id="TrainFrequency">
+                            </div>
+                            <!-- Submitt button -->
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+    <!-- jquery CDN File  -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-
-
+    <!-- bootstrap files  -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+    <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 
-<script>
-  // Your web app's Firebase configuration
-  var firebaseConfig = {
-    apiKey: "AIzaSyDFPJZ3JZCCPlo-SvfJQMB0eq1yhoRj29w",
-    authDomain: "trainscheduler-calli.firebaseapp.com",
-    databaseURL: "https://trainscheduler-calli.firebaseio.com",
-    projectId: "trainscheduler-calli",
-    storageBucket: "trainscheduler-calli.appspot.com",
-    messagingSenderId: "868445978911",
-    appId: "1:868445978911:web:1ed4d57c0f2adf23b0b02a"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-</script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDFPJZ3JZCCPlo-SvfJQMB0eq1yhoRj29w",
+            authDomain: "trainscheduler-calli.firebaseapp.com",
+            databaseURL: "https://trainscheduler-calli.firebaseio.com",
+            projectId: "trainscheduler-calli",
+            storageBucket: "trainscheduler-calli.appspot.com",
+            messagingSenderId: "868445978911",
+            appId: "1:868445978911:web:1ed4d57c0f2adf23b0b02a"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
 </body>
+
 </html>
