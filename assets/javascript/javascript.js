@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    // alert("aadded"); 
-
     // Firebase Initialize 
     var firebaseConfig = {
         apiKey: "AIzaSyDFPJZ3JZCCPlo-SvfJQMB0eq1yhoRj29w",
@@ -15,56 +13,90 @@ $(document).ready(function () {
 
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
-    var database = firebase.database();
 
-    // Firebase Event Listener 
-    database.ref().on('child_added', function (childSnapshot) {
-
-        var child = childSnapshot.val();
-        var trainNameDisplayed = childSnapshot.val().dbTrainName;
-        var trainDestinationDisplayed = childSnapshot.val().dbDestination;
-        var trainTimeDisplayed = childSnapshot.val().dbTrainTime;
-        var trainFrequencyDisplayed = childSnapshot.val().dbFrequency;
-        var trainNextArrivalDisplayed = childSnapshot.val().dbNextArrival;
-        var trainMinutesAwayDisplayed = childSnapshot.val().dbMinutesAway;
-
-        // moment.js 
-        var trainTimeConverted = moment(trainTimeDisplayed, "hh:mm");
-        var timeDifferance = moment().diff(moment(trainTimeConverted), "minutes");
-        var timeRemainder = timeDifferance % trainFrequencyDisplayed;
-        var minsAway = trainFrequencyDisplayed - timeRemainder;
-        var nextArrival = moment().add(minsAway, "minutes").format("hh:mm");
-
-        $('#tbody').append('<tr><td>' + trainNameDisplayed + '</td><td>' + trainDestinationDisplayed + '</td><td>' + trainFrequencyDisplayed + '</td><td>' + nextArrival + '</td><td>' + minsAway + '</td></tr>');
-    });
-    // End of Firebase 
+    var trianDatabase = firebase.database();
 
 
-
-
-
-    // submit button listener
-    $('#submitBtn').on('click', function () {
+    //when the user clicks the submit button, add a train 
+    $('#submitBtn').on("click", function (event) {
         event.preventDefault();
 
-        var newName = $('#TrainName').val().trim();
-        var newDestination = $('#TrainDestination').val().trim();
-        // var newTrainTime = moment($('#TrainTime').val().trim(), "hh:mm").format("X");
-        var newFrequency = $('#TrainFrequency').val().trim();
+        //train name 
+        var newName = $('#TrainName')
+            .val()
+            .trim();
 
-        // moment().format("hh:mm")
+        //train destination 
+        var newDestination = $('#TrainDestination')
+            .val()
+            .trim();
 
-        // Clear values when sumbit is clicked 
-        $(this).closest('form').find("input[type=text], textarea").val('');
+        //time input of the new train 
+        var newTrainTime = $('#TrainTime')
+            .val()
+            .trim();
 
-        // Push new train information in the firebase database 
-        database.ref().push({
-            dbTrainName: newName,
-            dbDestination: newDestination,
-            // dbTrainTime: newTrainTime,
-            dbFrequency: newFrequency
-        });
+        //train Frequency 
+        var newFrequency = $('#TrainFrequency')
+            .val()
+            .trim();
+
+        var newTrain = {
+            name: newName,
+            destination: newDestination,
+            trainTime: newTrainTime,
+            frequency: newFrequency
+        };
+
+        //PUSH the new train into FireBase Database 
+        trianDatabase.ref().push(newTrain);
+
+
+        //clear the form when user clicks submit 
+        $('#TrainName').val('');
+        $('#TrainDestination').val('');
+        $('#TrainTime').val('');
+        $('#TrainFrequency').val('');
     });
-});
 
-// end submit button listener
+
+
+    // Firebase Event Listener 
+    trianDatabase.ref().on('child_added', function (childSnapshot) {
+        console.log(childSnapshot.val());
+
+        var trainNameDisplayed = childSnapshot.val().name;
+        var trainDestinationDisplayed = childSnapshot.val().destination;
+        var trainTimeDisplayed = childSnapshot.val().trainTime;
+        var trainFrequencyDisplayed = childSnapshot.val().frequency;
+
+
+        var trainTimeArray = trainTimeDisplayed.split(':');
+        var time = moment().hours(trainTimeArray[0]).minutes(trainTimeArray[1]);
+        var maximum = moment().max(moment(), time);
+
+
+        var trainMins;
+        var trainArrival;
+        if (maximum === time) {
+            trainArrival = time.format("hh:mm");
+            trainMins = time.diff(moment(), "minutes");
+        } else {
+            var timeDifferance = moment().diff(time, "minutes");
+            var timeRemainder = timeDifferance % trainFrequencyDisplayed;
+            trainMins = trainFrequencyDisplayed - timeRemainder;
+
+            trainArrival = moment().add(trainMins, "m").format("hh:mm")
+        }
+
+        //add new trains into the table 
+        $('#trainTable  > tbody').append(
+            $('<tr>').append(
+                $('<td>').text(trainNameDisplayed),
+                $('<td>').text(trainDestinationDisplayed),
+                $('<td>').text(trainFrequencyDisplayed),
+                $('<td>').text(trainArrival),
+                $('<td>').text(trainMins),
+            )
+        ); 
+    }); 

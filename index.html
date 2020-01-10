@@ -6,24 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <!--Link to jQuery Library-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
+    <!--Link to jQuery Library-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Link to bootstrap css  -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <!-- Link to interal CSS file  -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-
-
     <!-- Firebase App  -->
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.0.4/firebase-database.js"></script>
 
-        <!-- Internal javascript file -->
-        <script src='./assets/javascript/javascript.js'></script>
+
+    <!-- moment js file   -->
+    <script src=“https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js”> </script> <!-- Link to interal CSS file -->
+  
+
+    <!-- <link rel="stylesheet" href="./assets/css/style.css"> -->
 
     <title>Train Scheduler</title>
 </head>
@@ -54,7 +53,7 @@
                         Train Schedule
                     </div>
                     <div class="card-body">
-                        <table class="table">
+                        <table class="table" id="trainTable">
                             <thead>
                                 <tr>
                                     <th scope="col">Train Name</th>
@@ -66,13 +65,7 @@
                             </thead>
                             <!-- Train inputs in the table  -->
                             <tbody>
-                                <tr>
-                                    <th scope="row">name of train</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                </tr>
+                             
                             </tbody>
                         </table>
                     </div>
@@ -117,9 +110,8 @@
         </div>
     </div>
 
-
-    <!-- moment js file   -->
-    <script src=“https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js”> </script> 
+        <!-- Internal javascript file -->
+        <script src='./assets/javascript/javascript.js'></script>
 
     <!-- bootstrap files  -->
     <!-- <script src=“https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js”
@@ -129,6 +121,6 @@
         integrity=“sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin=“anonymous”></script> -->
 
-</body>
+    </body>
 
 </html>
