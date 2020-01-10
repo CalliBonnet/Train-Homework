@@ -62,7 +62,7 @@ $(document).ready(function () {
 
 
     // Firebase Event Listener 
-    trianDatabase.ref().on('child_added', function (childSnapshot) {
+    trianDatabase.ref().on('child_added', function (childSnapshot, prevChildKey) {
         console.log(childSnapshot.val());
 
         var trainNameDisplayed = childSnapshot.val().name;
@@ -72,8 +72,12 @@ $(document).ready(function () {
 
 
         var trainTimeArray = trainTimeDisplayed.split(':');
-        var time = moment().hours(trainTimeArray[0]).minutes(trainTimeArray[1]);
-        var maximum = moment().max(moment(), time);
+        var time = moment()
+        .hours(trainTimeArray[0])
+        .minutes(trainTimeArray[1]);
+        
+        var maximum = moment()
+        .max(moment(), time);
 
 
         var trainMins;
@@ -99,4 +103,4 @@ $(document).ready(function () {
                 $('<td>').text(trainMins),
             )
         )
-  })}; 
+  })} ); 
