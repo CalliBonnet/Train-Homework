@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function () { 
 
     // Firebase Initialize 
     var firebaseConfig = {
@@ -98,5 +98,5 @@ $(document).ready(function () {
                 $('<td>').text(trainArrival),
                 $('<td>').text(trainMins),
             )
-        ); 
-    }); 
+        )
+  })}; 
