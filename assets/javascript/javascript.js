@@ -1,4 +1,3 @@
-import { listenerCount } from "cluster";
 
 // Firebase Initialize 
 var firebaseConfig = {
@@ -10,6 +9,7 @@ var firebaseConfig = {
     messagingSenderId: "868445978911",
     appId: "1:868445978911:web:1ed4d57c0f2adf23b0b02a"
 };
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database(); 
