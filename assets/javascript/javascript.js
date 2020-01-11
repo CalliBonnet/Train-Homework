@@ -14,10 +14,10 @@ $(document).ready(function () {
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 
-    var trianDatabase = firebase.database();
+    var database = firebase.database();
 
 
-    //when the user clicks the submit button, add a train 
+    //when the user clicks the submit button ===> add a train 
     $('#submitBtn').on("click", function (event) {
         event.preventDefault();
 
@@ -49,7 +49,7 @@ $(document).ready(function () {
         };
 
         //PUSH the new train into FireBase Database 
-        trianDatabase.ref().push(newTrain);
+        database.ref().push(newTrain);
 
 
         //clear the form when user clicks submit 
@@ -62,7 +62,7 @@ $(document).ready(function () {
 
 
     // Firebase Event Listener 
-    trianDatabase.ref().on('child_added', function (childSnapshot, prevChildKey) {
+    database.ref().on('child_added', function (childSnapshot, prevChildKey) {
         console.log(childSnapshot.val());
 
         var trainNameDisplayed = childSnapshot.val().name;
