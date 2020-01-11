@@ -62,7 +62,7 @@ $(document).ready(function () {
 
 
     // Firebase Event Listener 
-    database.ref().on('child_added', function (childSnapshot, prevChildKey) {
+    database.ref().on('child_added', function (childSnapshot) {
         console.log(childSnapshot.val());
 
         var trainNameDisplayed = childSnapshot.val().name;
